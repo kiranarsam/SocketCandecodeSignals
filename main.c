@@ -66,7 +66,7 @@ int main(int argc, char **argv)
 		if (!myFrame)
 		{
 			fprintf(stderr, "Error finding Frame %s\n", frameName);
-      releaseResource(&dataBase);
+			releaseResource(&dataBase);
 			exit(1);
 		}
 
@@ -76,7 +76,7 @@ int main(int argc, char **argv)
 			if (!mySignal)
 			{
 				fprintf(stderr, "Error finding Signal %s\n", signalName);
-        releaseResource(&dataBase);
+				releaseResource(&dataBase);
 				exit(1);
 			}
 		}
@@ -102,20 +102,20 @@ int main(int argc, char **argv)
 				ascframe) != 4)
 		{
 			fprintf(stderr, "incorrect line format in logfile\n");
-      res = 1;
-      goto err;
+			res = 1;
+			goto err;
 		}
 
 		if (parse_canframe(ascframe, &cf))
 		{
-      res = 1;
-      goto err;
+			res = 1;
+			goto err;
 		}
 		processFrame(callbackList, &cf, tv, device);
 	}
 
-  err:
-    releaseSignalCallbackResource(&callbackList);
-    releaseResource(&dataBase);
+	err:
+	releaseSignalCallbackResource(&callbackList);
+	releaseResource(&dataBase);
 	return res;
 }
